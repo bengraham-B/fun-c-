@@ -4,12 +4,24 @@
 
 using namespace std;
 
+void func(){
+    // Calling a Lua script
+    lua_State* L = luaL_newstate();
+    luaL_openlibs(L);
+    luaL_dofile(L, "script.lua");
+    cout << "End of function" <<endl;
+    cout << " " <<endl;
+}
+
 int main (){
+
+    func();
+    cout << "After the func call" <<endl;
     // Creating the Lua State
     lua_State* L = luaL_newstate();
 
     luaL_openlibs(L); // load the lua standard libraries
-
+    luaL_dofile(L, "print.lua"); // Running the Lua script
     // Running the lua code 
     const char* lua_code = "print('Hello Lua') print('Lua Again')";
 
@@ -26,10 +38,10 @@ int main (){
     int result_mulitply = multiply(302, 45);
     int result_divide = divide(60, 15);
 
-    cout << result_add <<endl;
-    cout << result_minus << endl;
-    cout << result_mulitply <<endl;
-    cout << result_divide << endl;
+    cout << "Add: " + to_string(result_add) <<endl;
+    cout << "Minus: " + to_string(result_minus) << endl;
+    cout << "Multiply: " + to_string(result_mulitply) <<endl;
+    cout << "Divide: " + to_string(result_divide) << endl;
 
     lua_close(L);
 
